@@ -29,6 +29,7 @@ func main() {
 
 	app.Get(
 		"/health", func(c *fiber.Ctx) error {
+			logger.Info("/health called")
 			return c.JSON(
 				fiber.Map{
 					"status": "ok",
