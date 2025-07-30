@@ -10,7 +10,7 @@ import (
 
 func main() {
 	logger.Info("Starting application", zap.String("version", "1.0.0"))
-	shared.InitialiseAppSettings(".")
+	shared.SetupEnv(".")
 	logger.Info("Application initialized successfully")
 
 	app := fiber.New()

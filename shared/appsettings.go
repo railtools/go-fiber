@@ -6,7 +6,7 @@ import (
 	"main/logger"
 )
 
-func InitialiseAppSettings(path string) {
+func SetupEnv(path string) {
 	logger.Info("Initializing application settings", zap.String("path", path))
 
 	// Tell viper the path/location of your env file. If it is root just add "."
@@ -28,6 +28,8 @@ func InitialiseAppSettings(path string) {
 			logger.Fatal("Error reading configuration", zap.Error(err))
 		}
 	} else {
-		logger.Info("Configuration loaded successfully", zap.String("config_file", viper.ConfigFileUsed()))
+		logger.Info(
+			"Configuration loaded successfully", zap.String("config_file", viper.ConfigFileUsed()),
+		)
 	}
 }
