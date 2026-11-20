@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v3"
 	"go.uber.org/zap"
 	"main/logger"
 	"main/shared"
@@ -16,7 +16,7 @@ func main() {
 	app := fiber.New()
 
 	app.Get(
-		"/", func(c *fiber.Ctx) error {
+		"/", func(c fiber.Ctx) error {
 			return c.JSON(
 				fiber.Map{
 					"status": "ok",
@@ -28,7 +28,7 @@ func main() {
 	)
 
 	app.Get(
-		"/health", func(c *fiber.Ctx) error {
+		"/health", func(c fiber.Ctx) error {
 			logger.Info("/health called")
 			return c.JSON(
 				fiber.Map{
@@ -40,6 +40,7 @@ func main() {
 		},
 	)
 
-	logger.Info("Starting server on port 8080")
-	logger.Fatal("Server failed to start", zap.Error(app.Listen(":8080")))
+	port := shared.Port()
+	logger.Info("Starting server", zap.String("port", port))
+	logger.Fatal("Server failed to start", zap.Error(app.Listen(":"+port)))
 }

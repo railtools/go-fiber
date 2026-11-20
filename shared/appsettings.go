@@ -33,3 +33,12 @@ func SetupEnv(path string) {
 		)
 	}
 }
+
+// Port returns the port to listen on. Railway injects PORT at runtime;
+// fall back to 8080 for local development.
+func Port() string {
+	if port := viper.GetString("PORT"); port != "" {
+		return port
+	}
+	return "8080"
+}
